@@ -1,19 +1,35 @@
-<htnl>
+<html>
 
     <head>
         <title>Path.js demo</title>
+        <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+        <meta name="viewport" content="width=device-width" />
+
         <script src='lib/simplify.js'></script>
         <script src='path.js'></script>
         <!-- just for the demo, not really needed -->
         <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
         <script src="http://codeorigin.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.2/jquery.ui.touch-punch.min.js"></script>
+
+        <style type="text/css">
+            #dragme {
+                background-color:yellow;
+                padding:10px;
+                border-radius:15px;
+                top:100px;
+                left:100px;
+                border-style:solid;
+                border-width:3px;
+            }
+        </style>
     </head>
 
     <body>
 
         <input type='button' value='Replay' onclick='replay();' />
 
-        <a style='background-color:yellow' id='dragme'>Drag me!</a>
+        <a id='dragme'>Drag me!</a>
 
         <script type='application/javascript'>
 
