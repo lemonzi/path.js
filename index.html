@@ -1,0 +1,59 @@
+<htnl>
+
+    <head>
+        <title>Path.js demo</title>
+        <script src='lib/simplify.js'></script>
+        <script src='path.js'></script>
+        <!-- just for the demo, not really needed -->
+        <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+        <script src="http://codeorigin.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
+    </head>
+
+    <body>
+
+        <input type='button' value='Replay' onclick='replay();' />
+
+        <a style='background-color:yellow' id='dragme'>Drag me!</a>
+
+        <script type='application/javascript'>
+
+            var path;
+            var $el = $('#dragme');
+            var lastTime = 0;
+
+            $(function() {
+                $el.draggable({
+                    start: function(e,ui) {
+                        var t0 = new Date().getTime();
+                        path = new Path(t0);
+                        path.add([ui.position.top, ui.position.left], t0);
+                    },
+                    drag: function(e,ui) {
+                        path.add([ui.position.top, ui.position.left], new Date().getTime());
+                    },
+                    stop: function(e,ui) {
+                        path.add([ui.position.top, ui.position.left], new Date().getTime());
+                        path.close();
+                    }
+                });
+            });
+
+            function replay() {
+                if (path.finished) {
+                    path.reset();
+                    return;
+                }
+                var point = path.next();
+                var dur = (point.t - lastTime);
+                lastTime = point.t;
+                setTimeout(replay, dur);
+                $el.animate({
+                    top: point.x[0],
+                    left: point.x[1]
+                }, dur, 'linear');
+            }
+
+        </script>
+
+    </body>
+</html>
